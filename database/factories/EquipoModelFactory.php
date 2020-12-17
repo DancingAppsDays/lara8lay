@@ -26,8 +26,8 @@ class EquipoModelFactory extends Factory
         
             return [
                 'nombre' => $this->faker->text(15),
-                'puesto' => $this->faker->text(10),  //name,
-                'lastcheck' => $this->faker->date,//address,//text(20),
+                'puesto' => $this->faker->text(10),  //name,        //UNTESTED
+                'lastcheck' => $this->faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),//date() failed, call to format()onstring
                 'riskfactor' =>$this->faker->randomDigit   
                   //({min:1,max:100})  //{$min=1,$max=100}) //($nbMaxDecimals= 2,$min=1,$max=100)   //number_format(2)
                 //'password' => $password ?: $password = bcrypt('secret'),

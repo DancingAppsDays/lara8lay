@@ -49,7 +49,13 @@ class Maquinacontroller extends Controller
     {
         //
         $empleadonuevo = equip::create($request->all());
-        return $empleadonuevo;
+        
+        return response()->json([
+            'status' => 'success',
+            'data' => 'Maquina añadida con éxito',
+            'dat' => $empleadonuevo
+        ]);
+        //return $empleadonuevo;
     }
 
     /**

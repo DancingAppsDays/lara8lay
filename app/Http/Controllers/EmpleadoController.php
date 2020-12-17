@@ -104,7 +104,13 @@ class EmpleadoController extends Controller
     {
         //
         $empleadonuevo = EmpleadoModel::create($request->all());
-        return $empleadonuevo;
+        
+        return response()->json([
+          'status' => 'success',
+          'data' => 'Empleado añadido con èxito',
+          'dat' => $empleadonuevo
+      ]);
+        //return $empleadonuevo;
 
         //modify tooo
       //  $emp = $request -> isMethod('put')? Empleado::findOrFail

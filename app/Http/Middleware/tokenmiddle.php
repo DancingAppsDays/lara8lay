@@ -22,6 +22,8 @@ class tokenmiddle
         $headertoken = $request->header('Authorization');
         $token = null;
 
+        if(!empty($headertoken))//->isEmpty())    //if not empty
+      {
         $token = substr($headertoken,13);   //included dobule beraerer
 
     $authuser = User::where('apitoken', '=', $token)->first();
@@ -37,6 +39,13 @@ class tokenmiddle
           'data' => 'Acceso no autorizado, Favor de ingresar'
         ]); 
       }
+    }else{
+      return response()->json([
+        'status' => 'error',           //error para mas espsecifico
+        'data' => 'Acceso no autorizado, Favor de ingresar'
+      ]); 
+
+    }
 
     }
 }

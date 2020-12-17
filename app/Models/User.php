@@ -43,4 +43,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+/*
+    public function getAuthPassword()           //from laravel8 maybe overriden
+{
+    return $this->password;
+}      */
 }

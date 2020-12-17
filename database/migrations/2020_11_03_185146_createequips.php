@@ -19,7 +19,7 @@ class Createequips extends Migration
             $table->engine = 'InnoDB';  //para FK referencials//NOTTested
             $table->increments('id');
             $table->string('nombre');//->unique(); //nullable
-            $table->string('puesto');
+            $table->string('puesto')->nullable();   //Vector3 position?
             $table->string('lastcheck')->nullable();//->unique(); //nullable    //after the fact
             $table->decimal('riskfactor',1,0)->nullable();
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;  //lav8 docs?
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Hash;  //lav8 docs?
 use App\Http\Controllers\Controller; 
 use Illuminate\Support\Facades\Auth; 
 use Validator;
+
+use Exception;
 
 
 
@@ -42,13 +45,33 @@ class AuthController extends Controller
  
     public function login(Request $request){ 
  
-    if(Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')]))
+      $passo = $request->password;
+      //$passo= Hash::make( $request->password);
+
+      
+      // if(Auth::attempt( $request->only(['email', 'passwurd'])))
+     // if (Auth::attempt(['email' => $request->email,'password' => $request->password]))
+      if(Auth::attempt( $request->only(['password', 'email'])))  //Auth::login($user))//
+    //if(Auth::attempt(['email' => $request->get('email'), 'password' => $passo]))//$request->get('password')]))
+   
+   //if(Auth::attempt(['email' => $email, 'password' => $password])) 
+   { /*return response()->json([
+      'status' => 'success',
+      'data' => 'somethings'//$success
+    ]); }else
     {
+      return response()->json([
+        'status' => 'error',
+        'error' => 'authfailledpassBUG'//$success
+      ]);
+    }
+     if(true){*/
       
       //lara 5.4
-      $user =auth()->user();//
+      $user = auth()->user();//
        //Auth::user(); //auth()->user();
 
+       
 
     //Setting login response 
     $success['token'] = $this->apiToken;      //sends error wihtout token
@@ -81,7 +104,7 @@ class AuthController extends Controller
       return response()->json([    //(['error' => 'Email or password does\'t exist'], 401);
         'status' => 'error',
         'data' => 'Unauthorized Access',
-        'error' => 'Email y password no coinciden', 401
+        'error' => 'Email y password no coinciden'//, // 401
       ]); 
     }
    }
@@ -99,17 +122,20 @@ class AuthController extends Controller
        return response()->json(['error'=>$validator->errors()]);
      }*/
       //lav 8
-     $hashed = Hash::make('password', [
-      'rounds' => 12,
-  ]);
+     //$hashed = Hash::make('password', [
+     // 'rounds' => 12,
+  //]);
+
+  
 
   $postArray = $request->all();                                                   //lav5.4
-     $postArray['password'] = $hashed;// bcrypt($postArray['password']);      //withoutthis auth faileeeed1!!
+     $postArray['password'] = bcrypt($postArray['password']);      //withoutthis auth faileeeed1!!
      
      
 
      //$user = User::create($request); 
 
+     try{
 
       $user = User::create($postArray); 
      
@@ -134,6 +160,14 @@ class AuthController extends Controller
        'status' => 'success',
        'data' => $success,
      ]); 
+
+    }catch(Exception $e){
+
+      return response()->json([
+        'status' => 'error',
+        'message' => "Error al registrar, el correo ya existe",
+      ]); 
+    }
    }
  
  

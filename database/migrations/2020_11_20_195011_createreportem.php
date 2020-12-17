@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Createturno extends Migration
+class Createreportem extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +14,19 @@ class Createturno extends Migration
     public function up()
     {
         //
-        Schema::create('turnodetalles', function (Blueprint $table) {
+        Schema::create('reportemedico', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idempleado')->unsigned();   
             $table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
-            $table->string('puesto')->nullable();      //Vector3 pos?
-            $table->string('area')->nullable();     //might come from Catalogo Areas table class
             $table->date('fecha');
+            $table->text('contenido');//  //was string,255);    // ? ? ? need more stringg!!
+
+            $table->integer('presionA')->nullable();
+            $table->integer('presionB')->nullable();
+            $table->decimal('colesterol',8,3)->nullable();  //ocho entotal. 5 a la izquierda
+            $table->decimal('azucar',8,3)->nullable();
+            $table->integer('vista')->nullable();
+            
             $table->timestamps();
         });
     }
@@ -33,6 +39,6 @@ class Createturno extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('turnodetalles');
+        Schema::dropIfExists('reportemedico');
     }
 }

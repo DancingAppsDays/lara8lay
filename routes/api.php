@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\MIddleware\tokenmiddle;
+use App\Http\Middleware\tokenmiddle;
+use App\Http\Middleware\prefight;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,12 +25,37 @@ Route::middleware('auth:api')->post('/user', function (Request $request) {
 */
 //LEGADO del laralyaout....
 
-Route::post('Login', 'AuthController@login');//-> middleware('cors');
+Route::get('/clear-cache', function() {
+    
+  $exitCode = Artisan::call('config:cache');
+  $exitCode = Artisan::call('route:clear');
+  return 'DONE'; //Return anything
+});
+Route::get('/clear-cache2', function() {
+  
+  $exitCode = Artisan::call('route:clear');
+  return 'DONE2'; //Return anything
+});
+
+
+Route::get('Expediente/{id}','ExpedientemController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
+Route::post('Expediente','ExpedientemController@store');//->middleware(tokenmiddle::class);
+
+
+Route::group(['middleware' =>['pref']], function(){
+
+Route::post('Login', 'AuthController@login');//-> middleware('pref');
 Route::post('Logout', 'AuthController@logout');//-> middleware('cors');
-Route::post('Registro', 'AuthController@register');//-> middleware('cors');
+Route::post('Registro', 'AuthController@register');//-> middleware('pref');
 
 
 //});
+
+Route::get('Reportem','ReportemedicoController@index');//->middleware('tokenmiddle');//->middleware('cors');//->middleware(tokenmiddle::class);//->middleware('tokenmiddle'); //-> middleware('cors');
+Route::get('Reportem/{id}','ReportemedicoController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
+Route::get('Reportem1/{id}','ReportemedicoController@showsingle');
+
+
 //Route::post('Login', 'Login@login')-> middleware('cors');
 
 //Route::post('Registro', 'AuthController@register')-> middleware('cors');
@@ -49,7 +76,7 @@ Route::post('Maquina/{id}','Maquinacontroller@update')->middleware(tokenmiddle::
 //from the resource tut
 //list empleados route
 
-Route::get('Empleado','EmpleadoController@index')->middleware(tokenmiddle::class);//->middleware('tokenmiddle'); //-> middleware('cors');
+Route::get('Empleado','EmpleadoController@index');//->middleware('tokenmiddle');//->middleware('cors');//->middleware(tokenmiddle::class);//->middleware('tokenmiddle'); //-> middleware('cors');
 
 //list single
 Route::get('Empleado/{id}','EmpleadoController@show')->middleware(tokenmiddle::class);//-> middleware('cors');
@@ -65,6 +92,7 @@ Route::delete('Empleado','EmpleadoController@destroy')->middleware(tokenmiddle::
 
 Route::delete('Maquina','Maquinacontroller@destroy')->middleware(tokenmiddle::class);
 
+});
 /*
 
                     //conjunto de rutas que apunta al controller    
