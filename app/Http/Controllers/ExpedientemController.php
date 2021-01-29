@@ -38,12 +38,22 @@ class ExpedientemController extends Controller
     public function show($id) //for individual resource
     {
         //          //model
-        $article = ex::findOrFail($id);
+       // $article = ex::findOrFail($id);
+       $exp = ex::where('idempleado','=',$id)->first();
 
+       if ($exp === null) {
+        // ecp doesn't exist
+        return response()->json([
+            'status' => 'success',
+            'mensaje' => 'Expediente no encontrado',
+            'data' => $exp
+        ]);
+
+     }
         return response()->json([
             'status' => 'success',
             'mensaje' => 'Expediente obtenido con èxito',
-            'data' => $article
+            'data' => $exp
         ]);
         //return   $article; //return new empleadoresource(article) missing
     }

@@ -20,6 +20,8 @@ class Createturno extends Migration
             $table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
             $table->string('puesto')->nullable();      //Vector3 pos?
             $table->string('area')->nullable();     //might come from Catalogo Areas table class
+            $table->integer('horario')->nullable();  //1 ,2 ,3
+           
             $table->date('fecha');
             $table->timestamps();
         });

@@ -27,6 +27,9 @@ class EmpleadoModelFactory extends Factory
         return [
             'nombre' => $this->faker->name,
             'puesto' => $this->faker->text(20),
+            'area' =>$this->faker->optional(0.7, 1)->numberBetween(1,4), 
+            'positionx' =>$this->faker->numberBetween(1,100),   //numerify($string = '###'),      //NUMBER from UNITY SPACE::::
+            'positiony' =>$this->faker->numberBetween(1,100),
             //
         ];
     }

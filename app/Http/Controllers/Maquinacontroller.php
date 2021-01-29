@@ -23,10 +23,10 @@ class Maquinacontroller extends Controller
        
         return response()->json([
             'status' => 'success',
-            'data' => 'Lista recuperada con èxito',
-            'dat' => $emples
+            'mensaje' => 'Lista recuperada con èxito',
+            'data' => $emples           //checar en angular, antes era dat....
         ]);
-       // return $emples;
+        return $emples;
     }
 
     /**

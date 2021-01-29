@@ -9,5 +9,6 @@ class EquipoModel extends Model
 {
     use HasFactory;
     protected $table = 'equips';
-    protected $fillable = ["nombre","puesto"];//,"lastcheck"];  //could store new....
+    //protected $fillable = ["nombre","puesto"];//,"lastcheck"];  //could store new....
+    protected $guarded = [];
 }

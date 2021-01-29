@@ -37,13 +37,24 @@ Route::get('/clear-cache2', function() {
   return 'DONE2'; //Return anything
 });
 Route::get('Examenmes/{id}','ExamenmeController@showall');
+
 Route::get('Examenme/{id}','ExamenmeController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
 Route::post('Examenme','ExamenmeController@store');//->middleware(tokenmiddle::class);
+Route::post('Examenme/{id}','ExamenmeController@update');
 
 
 
 Route::get('Expediente/{id}','ExpedientemController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
 Route::post('Expediente','ExpedientemController@store');//->middleware(tokenmiddle::class);
+
+
+Route::get('Accidentes/{id}','IncidentesController@showall');
+
+Route::get('Accidente/{id}','IncidentesController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
+Route::post('Accidente','IncidentesController@store');
+
+
+
 
 
 Route::group(['middleware' =>['pref']], function(){
@@ -71,10 +82,10 @@ Route::get('Turno/{id}','TurnoController@show')->middleware(tokenmiddle::class);
 
 //Route::apiResource("Maquina","EquipController");// dontttt-> middleware('cors');  
 
-Route::get('Maquina','Maquinacontroller@index')->middleware(tokenmiddle::class); //-> middleware('cors');
+Route::get('Maquina','Maquinacontroller@index');//->middleware(tokenmiddle::class); //-> middleware('cors');
 
 Route::get('Maquina/{id}','Maquinacontroller@show')->middleware(tokenmiddle::class);//> middleware('cors'); 
-Route::post('Maquina','Maquinacontroller@store')->middleware(tokenmiddle::class);//-> middleware('cors');    //DEBUGin
+Route::post('Maquina','Maquinacontroller@store');//->middleware(tokenmiddle::class);//-> middleware('cors');    //DEBUGin
 Route::post('Maquina/{id}','Maquinacontroller@update')->middleware(tokenmiddle::class);//-> middleware('cors');    //DEBUGin
 
 //from the resource tut

@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
       //funciona con el modelo si la factory se llama igual    - --laravel 8
-      EmpleadoModel::factory(35)->create(); //FUNCIONA PERO TRATA de insertan en empleado_models tabla..
+      EmpleadoModel::factory(21)->create(); //FUNCIONA PERO TRATA de insertan en empleado_models tabla..
       
-      EquipoModel::factory(35)->create();
+      EquipoModel::factory(11)->create();
       
       User::factory(4)->create();
       

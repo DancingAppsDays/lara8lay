@@ -58,4 +58,20 @@ class ExamenmeController extends Controller
         //return   $article; //return new empleadoresource(article) missing
     }
 
+    public function update(Request $request, $id)  //used store for update....
+    {
+       
+      $exa = ex::where('id','=',$id)->first();
+      
+      $input = $request->all();
+    $exa->fill($input)->save();
+        
+   //($request->all());
+   return response()->json([
+    'status' => 'success',
+    'mensaje' => 'Examen actualizado con èxito',
+    'data' => $exa
+]);
+    }
+
 }

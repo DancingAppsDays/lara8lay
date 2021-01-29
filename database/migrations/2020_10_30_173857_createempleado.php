@@ -18,6 +18,12 @@ class Createempleado extends Migration
             $table->increments('id');  //bigincrements?? creo unquie
             $table->string('nombre');//->unique(); //nullable
             $table->string('puesto');
+
+            $table->string('area')->nullable();                 //21 podría ser uint
+            $table->string('positionx')->nullable(); 
+            $table->string('positiony')->nullable(); 
+
+            $table->text('profilepic')->nullable(); 
             $table->timestamps();
         });
     }

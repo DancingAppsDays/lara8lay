@@ -23,6 +23,7 @@ class EmpleadoFactory extends Factory
         return [
             'nombre' => $this->$faker->name,
             'puesto' => $this->$faker->text(20),
+          
             //
         ];
     }

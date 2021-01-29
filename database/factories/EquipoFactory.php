@@ -25,12 +25,31 @@ class EquipoFactory extends Factory
 
     //$factory->define(App\EquipoModel::class, function (Faker $faker) {
         //static $password;
+       
+       // $random_number = intval( "0" . rand(1,9) . rand
+        //$pos1 = rand(5, 15);
+        // $pos1 =rand(0, 100);          //thats UNITY dependant
+       // $pos2 = mt_rand(0, 100);  
+       //echo  rand(5, 15);
+       //$pos2 = $faker->randomDigit;
+
+       
+
+       // string $posa =  $faker->randomElement(['active', 'completed', 'on hold']);
+
         public function definition()
         {
-        return [
+
+           
+
+        return [                //DID THIS SHIT EVEN WORKEDD? ? ? MIGHT HAVE IN LARA 5.6
             'nombre' => $faker->text(15),  //name,
             'lastcheck' => $faker->date,//address,//text(20),
-            'riskfactor' =>$faker->randomDigit   
+            'riskfactor' =>$faker->randomDigit,
+            'area' =>$faker->randomDigit,
+            'positionx' =>$faker->numerify($string = '###'),
+            'positiony' =>$faker->numerify($string = '###')
+                             //$faker-> randomDigit,
               //({min:1,max:100})  //{$min=1,$max=100}) //($nbMaxDecimals= 2,$min=1,$max=100)   //number_format(2)
             //'password' => $password ?: $password = bcrypt('secret'),
             //'remember_token' => str_random(10),
