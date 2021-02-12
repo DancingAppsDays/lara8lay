@@ -17,8 +17,9 @@ class CreatePuestosTable extends Migration
             $table->id();
 
             $table->integer('area')->nullable();                 //21 podría ser uint
-            $table->string('positionx')->nullable(); 
-            $table->string('positiony')->nullable();  
+            $table->decimal('positionx',7,2)->nullable(); 
+            $table->decimal('positiony',7,2)->nullable();       //actually z
+            $table->decimal('rotation',7,2)->nullable(); 
             
             $table->timestamps();
         });

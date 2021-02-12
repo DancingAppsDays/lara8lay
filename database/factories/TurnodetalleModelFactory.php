@@ -27,11 +27,12 @@ class TurnodetalleModelFactory extends Factory
         return [
             //
             'idempleado' =>$this->faker->randomDigit,//address,//text(20),
-            'fecha' =>$this->faker->date,
+            'fecha' =>$this->faker->dateTimeThisMonth()->format('Y-m-d'),// H:i:s'),
 
             'puesto' =>$this->faker->optional(0.7, 1)->numberBetween(1,4), //address,//text(20),
             'area' =>$this->faker->optional(0.7, 1)->numberBetween(1,4), 
             'horario' =>$this->faker->numberBetween(1,3), 
+            'idmaquina' =>$this->faker->randomDigit
         ];
     }
 }

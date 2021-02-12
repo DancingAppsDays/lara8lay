@@ -344,7 +344,7 @@ class CreateExamenmesTable extends Migration
             $table->text('observa')->nullable();
             $table->text('recomenda')->nullable();
             $table->text('apto')->nullable();
-            $table->text('firma')->nullable();
+            $table->text('firma')->nullable();      //was text and worked fine.... should it be longText
 
             $table->timestamps();
         });

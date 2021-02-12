@@ -94,14 +94,10 @@ class Maquinacontroller extends Controller
     {
         //
         $empleadonuevo = equip::where('id','=',$id)->first();
-        $empleadonuevo->update([
-          'nombre' => $request->get('nombre'),
-          'puesto'=> $request->get('puesto')//,
-          //'lastcheck'=>$request->get('lastcheck')
-      ]
-  
-          
-      );//($request->all());
+
+        $input = $request->all();
+   $empleadonuevo->fill($input)->save();
+
           return $empleadonuevo;
     }
 

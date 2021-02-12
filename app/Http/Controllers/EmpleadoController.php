@@ -68,8 +68,8 @@ class EmpleadoController extends Controller
             
         return response()->json([
             'status' => 'success',
-            'data' => 'Lista recuperada con èxito',
-            'dat' => $emples
+            'mensaje' => 'Lista recuperada con èxito',
+            'data' => $emples
         ]);
         //return $emples;// (json_encode($header));//$emples;
         
@@ -78,7 +78,8 @@ class EmpleadoController extends Controller
         }else { 
             return response()->json([
               'status' => 'error',
-              'data' => 'Unauthorized Access en Empleados list'
+              'mensaje' => 'Unauthorized Access en Empleados list',
+              'data' => 'errordata'
             ]); 
           }
        // return EmpleadoResource::collection($emples);
@@ -163,13 +164,10 @@ class EmpleadoController extends Controller
         );
        */
       $empleadonuevo = EmpleadoModel::where('id','=',$id)->first();
-      $empleadonuevo->update([
-        'nombre' => $request->get('nombre'),
-        'puesto'=> $request->get('puesto')
-    ]
+      
+         $input = $request->all();
+    $empleadonuevo->fill($input)->save();
 
-        
-    );//($request->all());
         return $empleadonuevo;
     }
 

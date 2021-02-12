@@ -9,5 +9,6 @@ class TurnodetalleModel extends Model
 {
     use HasFactory;
     protected $table = 'turnodetalles';         
-    protected $fillable = ["idempleado","fecha"];
+    //protected $fillable = ["idempleado","fecha"];
+    protected $guarded = [];
 }

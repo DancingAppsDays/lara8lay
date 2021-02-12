@@ -21,13 +21,17 @@ class Createequips extends Migration
             $table->string('nombre');//->unique(); //nullable
 
             $table->integer('area')->nullable();                 //21 podría ser uint
-            $table->string('positionx')->nullable(); 
-            $table->string('positiony')->nullable();            //is actulally z
+            $table->decimal('positionx',7,2)->nullable(); 
+            $table->decimal('positiony',7,2)->nullable();       //actually z
+            $table->decimal('rotation',7,2)->nullable(); 
+
+            $table->string('puesto')->nullable();   //Vector3 position?     //cambio de lugar en tala. problem b?
+
 
             $table->string('ruido')->nullable(); 
             $table->string('polvo')->nullable(); 
 
-            $table->string('puesto')->nullable();   //Vector3 position?
+           
             $table->string('lastcheck')->nullable();//->unique(); //nullable    //after the fact
             $table->decimal('riskfactor',1,0)->nullable();
             $table->timestamps();

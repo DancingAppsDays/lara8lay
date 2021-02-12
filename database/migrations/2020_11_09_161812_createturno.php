@@ -18,11 +18,16 @@ class Createturno extends Migration
             $table->increments('id');
             $table->integer('idempleado')->unsigned();   
             $table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
-            $table->string('puesto')->nullable();      //Vector3 pos?
-            $table->string('area')->nullable();     //might come from Catalogo Areas table class
+            //$table->integer('nombre')->nullable(); //MAYBE????
+            
+            $table->integer('puesto')->nullable();      //Vector3 pos?
+            $table->integer('area')->nullable();     //might come from Catalogo Areas table class
             $table->integer('horario')->nullable();  //1 ,2 ,3
            
             $table->date('fecha');
+
+            $table->integer('idmaquina')->unsigned()->nullable();   
+            //$table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
             $table->timestamps();
         });
     }

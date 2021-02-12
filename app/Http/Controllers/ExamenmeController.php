@@ -26,6 +26,19 @@ class ExamenmeController extends Controller
      
    }
 
+   public function indexa()
+   {
+       //
+   $results = DB::select("SELECT * FROM examenmes WHERE (idempleado,updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM examenmes GROUP BY idempleado) ORDER BY idempleado");
+
+       //$emples = TurnodetalleModel::all(); //paginate(25);  //::all()
+       return $results;
+
+      // return EmpleadoResource::collection($emples);
+      //$empleadonuevo = equip::where('id','=',$id)->first();
+   }
+
+
    /**
     * Display the specified resource.
     *

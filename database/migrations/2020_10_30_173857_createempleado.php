@@ -20,10 +20,11 @@ class Createempleado extends Migration
             $table->string('puesto');
 
             $table->string('area')->nullable();                 //21 podría ser uint
-            $table->string('positionx')->nullable(); 
-            $table->string('positiony')->nullable(); 
+            //$table->decimal('positionx',7,2)->nullable(); 
+            //$table->decimal('positiony',7,2)->nullable(); 
+           
 
-            $table->text('profilepic')->nullable(); 
+            $table->longText('profilepic')->nullable(); 
             $table->timestamps();
         });
     }

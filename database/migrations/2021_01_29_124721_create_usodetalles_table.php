@@ -15,6 +15,16 @@ class CreateUsodetallesTable extends Migration
     {
         Schema::create('usodetalles', function (Blueprint $table) {
             $table->id();
+
+            $table->integer('idempleado')->unsigned();   
+            $table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
+
+            $table->integer('idmaquina')->unsigned();   
+            $table->foreign('idmaquina')->references('id')-> on('Maquina')->onDelete('set null');
+
+            $table->integer('idturno')->unsigned();   
+            $table->foreign('idturno')->references('id')-> on('Turnodetalle')->onDelete('set null');
+
             $table->timestamps();
         });
     }

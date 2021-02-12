@@ -36,6 +36,10 @@ Route::get('/clear-cache2', function() {
   $exitCode = Artisan::call('route:clear');
   return 'DONE2'; //Return anything
 });
+
+Route::get('Examenmesx','ExamenmeController@indexa');
+
+
 Route::get('Examenmes/{id}','ExamenmeController@showall');
 
 Route::get('Examenme/{id}','ExamenmeController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
@@ -46,7 +50,7 @@ Route::post('Examenme/{id}','ExamenmeController@update');
 
 Route::get('Expediente/{id}','ExpedientemController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
 Route::post('Expediente','ExpedientemController@store');//->middleware(tokenmiddle::class);
-
+Route::post('Expediente/{id}','ExpedientemController@update');
 
 Route::get('Accidentes/{id}','IncidentesController@showall');
 
@@ -77,9 +81,20 @@ Route::get('Reportem1/{id}','ReportemedicoController@showsingle');
 
 //                                          WHY this is working...
 //Route::get('Empleado','EmpleadoController@index');//-> middleware('cors');//->middleware('auth');
-Route::get('Turno','TurnoController@index')->middleware(tokenmiddle::class);//-> middleware('cors');
-Route::get('Turno/{id}','TurnoController@show')->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 id
 
+
+
+Route::get('Turnox','TurnoController@indexa'); 
+
+Route::get('Turno/{puesto}/{horario}','TurnoController@indexpuesto'); 
+
+Route::get('Turno/{puesto}/{horario}/{area}','TurnoController@indexarea'); 
+
+Route::get('Turno/{puesto}/{horario}/{area}/{fecha}','TurnoController@indexfecha');
+
+Route::get('Turno','TurnoController@index');//->middleware(tokenmiddle::class);//-> middleware('cors');
+Route::get('Turno/{id}','TurnoController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 id
+Route::post('Turno','TurnoController@store');//->middleware(tokenmiddle::class);
 //Route::apiResource("Maquina","EquipController");// dontttt-> middleware('cors');  
 
 Route::get('Maquina','Maquinacontroller@index');//->middleware(tokenmiddle::class); //-> middleware('cors');

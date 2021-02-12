@@ -11,4 +11,5 @@ class EquipoModel extends Model
     protected $table = 'equips';
     //protected $fillable = ["nombre","puesto"];//,"lastcheck"];  //could store new....
     protected $guarded = [];
+    
 }

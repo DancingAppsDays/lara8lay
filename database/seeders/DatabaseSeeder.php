@@ -8,6 +8,8 @@ use App\Models\EquipoModel;
 use App\Models\User;
 use App\Models\TurnodetalleModel;
 use App\Models\Reportemedico;
+use App\Models\puesto;
+use App\Models\usodetalels;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,9 +27,11 @@ class DatabaseSeeder extends Seeder
       
       User::factory(4)->create();
       
-      TurnodetalleModel::factory(200)->create();
+      TurnodetalleModel::factory(100)->create();
       
       Reportemedico::factory(80)->create();
+
+     puesto::factory(12)->create();
       //User::factory(5)->create();
 
         //DB::table('empleados')-> fix in model

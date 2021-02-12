@@ -9,5 +9,6 @@ class Reportemedico extends Model
 {
     use HasFactory;
     protected $table = 'reportemedico';
-    protected $fillable = ["nombre","idempleado","fecha","contenido"];
+    //protected $fillable = ["nombre","idempleado","fecha","contenido"];
+    protected $guarded = [];
 }
