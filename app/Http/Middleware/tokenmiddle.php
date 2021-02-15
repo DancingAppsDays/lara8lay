@@ -36,13 +36,13 @@ class tokenmiddle
        }else { 
         return response()->json([
           'status' => 'error',           //error para mas espsecifico
-          'data' => 'Acceso no autorizado, Favor de ingresar'
+          'mensaje' => 'Acceso no autorizado, Favor de ingresar'    //data
         ]); 
       }
     }else{
       return response()->json([
         'status' => 'error',           //error para mas espsecifico
-        'data' => 'Acceso no autorizado, Favor de ingresar'
+        'mensaje' => 'Acceso no autorizado, Favor de ingresar'
       ]); 
 
     }

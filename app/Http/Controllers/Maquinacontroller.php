@@ -52,8 +52,8 @@ class Maquinacontroller extends Controller
         
         return response()->json([
             'status' => 'success',
-            'data' => 'Maquina añadida con éxito',
-            'dat' => $empleadonuevo
+            'mensaje' => 'Maquina añadida con éxito',
+            'data' => $empleadonuevo
         ]);
         //return $empleadonuevo;
     }
@@ -69,7 +69,11 @@ class Maquinacontroller extends Controller
         //
         $article = equip::findOrFail($id);
 
-        return   $article;
+        return response()->json([
+            'status' => 'success',
+            'mensaje' => 'Registro recuperado con éxito',
+            'data' => $article
+        ]); //return   $article;
     }
 
     /**
@@ -98,7 +102,12 @@ class Maquinacontroller extends Controller
         $input = $request->all();
    $empleadonuevo->fill($input)->save();
 
-          return $empleadonuevo;
+   return response()->json([
+    'status' => 'success',
+    'mensaje' => 'Maquina añadida con éxito',
+    'data' => $empleadonuevo
+]);
+        //  return $empleadonuevo;
     }
 
     /**

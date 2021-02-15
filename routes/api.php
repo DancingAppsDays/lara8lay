@@ -57,7 +57,9 @@ Route::get('Accidentes/{id}','IncidentesController@showall');
 Route::get('Accidente/{id}','IncidentesController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
 Route::post('Accidente','IncidentesController@store');
 
-
+Route::get('Usodetalle','UsodetalleController@index');//->middleware(tokenmiddle::class);//-> middleware('cors');
+Route::get('Usodetalle/{id}','UsodetalleController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 id
+Route::post('Usodetalle','UsodetalleController@store');
 
 
 

@@ -108,8 +108,8 @@ class EmpleadoController extends Controller
         
         return response()->json([
           'status' => 'success',
-          'data' => 'Empleado añadido con èxito',
-          'dat' => $empleadonuevo
+          'mensaje' => 'Empleado añadido con èxito',
+          'data' => $empleadonuevo
       ]);
         //return $empleadonuevo;
 
@@ -168,7 +168,12 @@ class EmpleadoController extends Controller
          $input = $request->all();
     $empleadonuevo->fill($input)->save();
 
-        return $empleadonuevo;
+        //return $empleadonuevo;
+        return response()->json([
+          'status' => 'success',
+          'mensaje' => 'Maquina añadida con éxito',
+          'data' => $empleadonuevo
+      ]);
     }
 
     /**

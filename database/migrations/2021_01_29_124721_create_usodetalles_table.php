@@ -25,6 +25,7 @@ class CreateUsodetallesTable extends Migration
             $table->integer('idturno')->unsigned();   
             $table->foreign('idturno')->references('id')-> on('Turnodetalle')->onDelete('set null');
 
+            $table->date('fecha');
             $table->timestamps();
         });
     }

@@ -81,7 +81,7 @@ class TurnoController extends Controller
         
         return response()->json([
           'status' => 'success',
-          'mensaje' => 'Empleado añadido con èxito',
+          'mensaje' => 'Turno registrado con èxito',
           'data' => $turn
       ]);
         //return $empleadonuevo;
