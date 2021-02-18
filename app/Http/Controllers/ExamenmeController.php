@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;      //???
 use App\Models\Examenme as ex;
 
+use DB; //olschool query
+
 class ExamenmeController extends Controller
 {
    //

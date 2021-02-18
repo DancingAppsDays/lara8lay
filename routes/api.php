@@ -61,7 +61,10 @@ Route::get('Usodetalle','UsodetalleController@index');//->middleware(tokenmiddle
 Route::get('Usodetalle/{id}','UsodetalleController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 id
 Route::post('Usodetalle','UsodetalleController@store');
 
-
+Route::get('Puesto','PuestoController@index');//->middleware(tokenmiddle::class);//-> middleware('cors');
+Route::get('Puesto/{id}','PuestoController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 id
+Route::post('Puesto','PuestoController@store');
+Route::post('Puesto/{id}','PuestoController@update');
 
 Route::group(['middleware' =>['pref']], function(){
 
@@ -95,8 +98,12 @@ Route::get('Turno/{puesto}/{horario}/{area}','TurnoController@indexarea');
 Route::get('Turno/{puesto}/{horario}/{area}/{fecha}','TurnoController@indexfecha');
 
 Route::get('Turno','TurnoController@index');//->middleware(tokenmiddle::class);//-> middleware('cors');
-Route::get('Turno/{id}','TurnoController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 id
+Route::get('Turno/{id}','TurnoController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 idempelado show many
+Route::get('Turno1/{id}','TurnoController@show1');                   //reciveves specifi id
 Route::post('Turno','TurnoController@store');//->middleware(tokenmiddle::class);
+Route::post('Turno/{id}','TurnoController@update');
+
+
 //Route::apiResource("Maquina","EquipController");// dontttt-> middleware('cors');  
 
 Route::get('Maquina','Maquinacontroller@index');//->middleware(tokenmiddle::class); //-> middleware('cors');

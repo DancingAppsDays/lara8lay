@@ -15,7 +15,11 @@ class UsodetalleController extends Controller
         //
 
         $emples = uso::all(); //paginate(25);  //::all()
-        return $emples;
+        return response()->json([
+            'status' => 'success',
+            'mensaje' => 'Lista recuperada con èxito',
+            'data' => $emples
+        ]);
 
        // return EmpleadoResource::collection($emples);
        //$empleadonuevo = equip::where('id','=',$id)->first();

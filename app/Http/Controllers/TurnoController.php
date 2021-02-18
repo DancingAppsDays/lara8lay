@@ -60,7 +60,11 @@ class TurnoController extends Controller
         //
 
         $emples = TurnodetalleModel::all(); //paginate(25);  //::all()
-        return $emples;
+        return response()->json([
+            'status' => 'success',
+            'mensaje' => 'TUrnos recuperado con éxito',
+            'data' => $emples
+        ]);
 
        // return EmpleadoResource::collection($emples);
        //$empleadonuevo = equip::where('id','=',$id)->first();
@@ -70,7 +74,23 @@ class TurnoController extends Controller
         //          //model
         $article = TurnodetalleModel::where('idempleado','=',$id)->get();
 
-        return   $article; //return new empleadoresource(article) missing
+        return response()->json([
+            'status' => 'success',
+            'mensaje' => 'TURNO recuperado con éxito',
+            'data' => $article
+        ]); //return new empleadoresource(article) missing
+    }
+
+    public function show1($id) //for individual resource
+    {
+        //          //model
+        $article = TurnodetalleModel::where('id','=',$id)->first();   //mejor findor fail     //was get(), pero da como resultado un array al que hay que acceder con data['data'][0]
+
+        return response()->json([
+            'status' => 'success',
+            'mensaje' => 'TURNO recuperado con éxito',
+            'data' => $article
+        ]);
     }
 
 
@@ -89,6 +109,22 @@ class TurnoController extends Controller
         //modify tooo
       //  $emp = $request -> isMethod('put')? Empleado::findOrFail
        // (request->empleado_id) : new Empleado;
+    }
+
+    public function update(Request $request,$id)        //ws $equip, but...
+    {
+        //
+        $empleadonuevo = TurnodetalleModel::where('id','=',$id)->first();
+
+        $input = $request->all();
+   $empleadonuevo->fill($input)->save();
+
+   return response()->json([
+    'status' => 'success',
+    'mensaje' => 'Turno actualizado con éxito',
+    'data' => $empleadonuevo
+]);
+        //  return $empleadonuevo;
     }
 
 }

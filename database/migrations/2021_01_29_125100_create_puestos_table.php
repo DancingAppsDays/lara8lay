@@ -15,11 +15,13 @@ class CreatePuestosTable extends Migration
     {
         Schema::create('puestos', function (Blueprint $table) {
             $table->id();
-
+            $table->string('nombre');
             $table->integer('area')->nullable();                 //21 podría ser uint
             $table->decimal('positionx',7,2)->nullable(); 
             $table->decimal('positiony',7,2)->nullable();       //actually z
             $table->decimal('rotation',7,2)->nullable(); 
+            $table->integer('idmaquina')->nullable();       //necesario? es optional
+            $table->text('descripcion')->nullable();    
             
             $table->timestamps();
         });

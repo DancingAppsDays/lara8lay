@@ -104,7 +104,7 @@ class Maquinacontroller extends Controller
 
    return response()->json([
     'status' => 'success',
-    'mensaje' => 'Maquina añadida con éxito',
+    'mensaje' => 'Maquina actualizada con éxito',
     'data' => $empleadonuevo
 ]);
         //  return $empleadonuevo;
