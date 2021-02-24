@@ -37,6 +37,17 @@ Route::get('/clear-cache2', function() {
   return 'DONE2'; //Return anything
 });
 
+
+
+
+Route::get('Audios1/{id}','AudioexController@show');
+Route::get('Audios/{id}','AudioexController@showall');
+
+Route::post('Audios','AudioexController@store');//->middleware(tokenmiddle::class);
+Route::post('Audios/{id}','AudioexController@update');
+
+
+
 Route::get('Examenmesx','ExamenmeController@indexa');
 
 

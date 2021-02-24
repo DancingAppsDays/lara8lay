@@ -22,7 +22,12 @@ class PuestoFactory extends Factory
     public function definition()
     {
         return [
-              'area' =>$this->faker->optional(0.7, 1)->numberBetween(1,4), 
+            'nombre' => $this->faker->text(10),
+              'area' =>$this->faker->optional(0.7, 1)->numberBetween(1,4),                    
+           'positionx'=>$this->faker-> numberBetween(50,200),
+           'positiony'=>$this->faker-> numberBetween(50,200),
+           'rotation'=>$this->faker->optional(0.5, 0)-> numberBetween(0,180),
+           'descripcion' => $this->faker->text(50),
         ];
     }
 }

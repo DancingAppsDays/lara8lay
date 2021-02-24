@@ -11,6 +11,8 @@ use App\Models\Reportemedico;
 use App\Models\puesto;
 use App\Models\usodetalels;
 
+use App\Models\Audioex;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -32,6 +34,10 @@ class DatabaseSeeder extends Seeder
       Reportemedico::factory(80)->create();
 
      puesto::factory(12)->create();
+
+
+    
+     Audioex::factory(100)->create();
       //User::factory(5)->create();
 
         //DB::table('empleados')-> fix in model
