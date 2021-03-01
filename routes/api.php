@@ -72,10 +72,15 @@ Route::get('Usodetalle','UsodetalleController@index');//->middleware(tokenmiddle
 Route::get('Usodetalle/{id}','UsodetalleController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 id
 Route::post('Usodetalle','UsodetalleController@store');
 
-Route::get('Puesto','PuestoController@index');//->middleware(tokenmiddle::class);//-> middleware('cors');
-Route::get('Puesto/{id}','PuestoController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 id
+Route::get('Puesto','PuestoController@index');//->middleware(tokenmiddle::class);
+Route::get('Puesto/{id}','PuestoController@show');//->middleware(tokenmiddle::class);
 Route::post('Puesto','PuestoController@store');
 Route::post('Puesto/{id}','PuestoController@update');
+
+Route::get('Area','AreaController@index');//->middleware(tokenmiddle::class);
+Route::get('Area/{id}','AreaController@show');//->middleware(tokenmiddle::class);
+Route::post('Area','AreaController@store');
+Route::post('Area/{id}','AreaController@update');
 
 Route::group(['middleware' =>['pref']], function(){
 
