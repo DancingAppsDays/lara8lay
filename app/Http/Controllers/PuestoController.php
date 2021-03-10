@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\puesto;
 
+use DB;
+
 class PuestoController extends Controller
 {
     public function index()
@@ -24,6 +26,28 @@ class PuestoController extends Controller
     {
         //          //model
         $article = puesto::where('id','=',$id)->first();   //mejor findor fail     //was get(), pero da como resultado un array al que hay que acceder con data['data'][0]
+
+        return response()->json([
+            'status' => 'success',
+            'mensaje' => 'Puesto recuperado con éxito',
+            'data' => $article
+        ]);
+    }
+
+    public function consulta($puesto,$horario,$fecha) //NUMERO ESPECIFICO
+    {
+        //          //model
+
+        $results = DB::select("SELECT * FROM turnodetalles WHERE (idempleado,fecha)  IN ( SELECT idempleado,MAX(fecha) FROM turnodetalles GROUP BY idempleado) ORDER BY idempleado");
+
+        //$emples = TurnodetalleModel::all(); //paginate(25);  //::all()
+        return $results;
+
+
+
+        $article = puesto::where('fecha','>=',$fecha)
+        ->where('horario','=',$horario)
+        ->where('puesto','=',$puesto)->get();   //mejor findor fail     //was get(), pero da como resultado un array al que hay que acceder con data['data'][0]
 
         return response()->json([
             'status' => 'success',

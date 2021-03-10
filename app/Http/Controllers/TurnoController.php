@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TurnodetalleModel;// as turna;// as equip; cant be BOYH...
+use DB;
+
 
 class TurnoController extends Controller
 {
@@ -26,8 +28,20 @@ class TurnoController extends Controller
 
         return   $article; 
     }
+
+    public function indexfecha($puesto,$horario,$fecha)
+    {
+        //
+    $article = TurnodetalleModel::where('fecha','>=',$fecha)
+    ->where('horario','=',$horario)
+    ->where('puesto','=',$puesto)->get();
+
+        return   $article; 
+    }
+
+
     
-     public function indexfecha($puesto,$horario,$area,$fecha)
+     public function indexfecharea($puesto,$horario,$area,$fecha)
     {
         //
     $article = TurnodetalleModel::where('area','=',$area)
@@ -38,7 +52,89 @@ class TurnoController extends Controller
         return   $article; 
     }
     
+
+    public function indexfechahorario($fecha,$horario)
+    {
+
+            
+       // $results = TurnodetalleModel::where('fecha','=',$fecha)
+       // ->where('horario','=',$horario)->get();
+            
+
+        //$results2 = $results::where('puesto','=',1)->get();
+
+
+
+        //$fecha = STR_TO_DATE($fecha, "%Y,%m,%d ");
+            // between '2018-01-01
+            //$fecha = strtotime($fecha);
+            //$fecha =date('d/m/Y', $fecha);
+
+            //$fecha = DateTime::createFromFormat('m/d/Y H:i:s', $fecha.' 00:00:00');
+           // $myfecha = $fecha->format('Y-m-d H:i:s');
+
+        //$myfecha = "'" + (string)$fecha + "'";   //FAIL
+        $myfecha = "'";
+         $myfecha .= (string)$fecha;
+         $myfecha .= "'";
+       // $results = $myfecha;
+
     
+        
+       $results = DB::select(                           // fecha  CAUSA ERRRORRRRRRRRR sin comilla  ' ' ' simple ! ! ! ! ' ' ' '
+           // "SELECT * FROM turnodetalles WHERE fecha >= $myfecha AND horario = $horario  AND idempleado IN (SELECT idempleado FROM turnodetalles GROUP BY idempleado) ORDER BY idempleado"
+         
+         //works...
+          // "SELECT * FROM turnodetalles WHERE (idempleado,fecha)  IN (SELECT idempleado,MAX(fecha) FROM turnodetalles GROUP BY idempleado) AND fecha >=$myfecha ORDER BY idempleado"// STR_TO_DATE($fecha,'%m/%d/%Y') "//(STR_TO_DATE($fecha, '%Y,%m,%d '))    "   //   && horario = $horario"     horario = $horario AND 
+      
+
+         //INNER JOIN 
+          //works on turno specific,, but.. turno depende de empleado so....
+         // "SELECT * FROM turnodetalles WHERE (puesto,fecha)  IN (SELECT puesto,MAX(fecha) FROM turnodetalles GROUP BY puesto) ORDER BY puesto"
+
+
+         // "SELECT * FROM turnodetalles WHERE (idempleado,fecha)  IN (SELECT idempleado,MAX(fecha) FROM turnodetalles GROUP BY idempleado)  ORDER BY idempleado"
+         
+                //PORQUW NO se limita a un idempleado! ! ? ?    //misterio resuelto, si tienen la misma fecha,(updatedat) aparecen repetidos"
+            //"SELECT idempleado FROM audioexes WHERE (idempleado,updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM audioexes GROUP BY idempleado)"// ORDER BY idempleado"
+
+
+
+
+           // "SELECT id, nombre as NombreEmpleado FROM audioexes WHERE idempleado IN (SELECT id FROM empleados WHERE area = 2) AND i2000 >30 AND d2000>30"   //WORKS!
+            
+
+
+          //"SELECT e.nombre,t.fecha,m.nombre as nombremaquina, m.ruido FROM turnodetalles as t INNER JOIN empleados  as e ON e.id = t.idempleado  INNER JOIN equips  as m ON t.idmaquina  =  m.id WHERE m.ruido >4 AND t.fecha > '2021-02-21'"
+
+          //optimzar? agarra todas las tablas y luego revisa o primera checa condiciones y las junta....
+          //"SELECT e.id, e.nombre,t.fecha,m.nombre as nombremaquina, m.ruido FROM turnodetalles as t INNER JOIN  empleados  as e ON e.id = t.idempleado  INNER JOIN equips  as m ON t.idmaquina  =  m.id INNER JOIN audioexes as a ON a.idempleado = e.id WHERE m.ruido >4 AND t.fecha >= '2021-02-11' AND  i2000 >20 AND d2000>20 "         //(SELECT audioexes.idempleado IN audioexes WHERE i2000 >10 AND d2000>10)
+
+
+         //no funciono para mostrar todo el registro mas alto
+       // "SELECT * FROM audioexes WHERE (d2000,i2000) IN (SELECT MAX(d2000),MAX(i2000) FROM audioexes GROUP BY i2000)"
+
+            //not so good eiter
+        //"SELECT MAX(i2000) FROM audioexes WHERE i2000 < (SELECT MAX(i2000) FROM audioexes) GROUP BY idempleado"  //Group BY shows every regfistro?
+
+            //2 max valoreas de tabla, no funcional...
+        // "SELECT  nombre,max(i2000) FROM audioexes GROUP BY id ORDER By i2000 Desc Limit 2"
+
+            //wORKS, para obtener el mas alta de cada emp?
+        "SELECT id,idempleado,nombre,d2000 FROM audioexes WHERE (idempleado,d2000) IN (SELECT idempleado,MAX(d2000) FROM audioexes GROUP BY idempleado)"
+        //obtiene solo el mayor
+       // "SELECT id,idempleado,nombre,d2000 FROM audioexes WHERE d2000 IN (SELECT MAX(d2000) FROM audioexes)"
+
+
+
+
+
+        );
+
+
+return $results;
+    }
+
     
       public function indexa()
     {

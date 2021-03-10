@@ -77,6 +77,15 @@ Route::get('Puesto/{id}','PuestoController@show');//->middleware(tokenmiddle::cl
 Route::post('Puesto','PuestoController@store');
 Route::post('Puesto/{id}','PuestoController@update');
 
+
+
+Route::get('Puestocon/{puesto}/{horario}/{fecha}','PuestoController@consulta');     //nueva consulta multi
+
+
+
+
+
+
 Route::get('Area','AreaController@index');//->middleware(tokenmiddle::class);
 Route::get('Area/{id}','AreaController@show');//->middleware(tokenmiddle::class);
 Route::post('Area','AreaController@store');
@@ -107,11 +116,18 @@ Route::get('Reportem1/{id}','ReportemedicoController@showsingle');
 
 Route::get('Turnox','TurnoController@indexa'); 
 
+
 Route::get('Turno/{puesto}/{horario}','TurnoController@indexpuesto'); 
 
-Route::get('Turno/{puesto}/{horario}/{area}','TurnoController@indexarea'); 
+Route::get('Turnoa/{puesto}/{horario}/{area}','TurnoController@indexarea'); 
 
-Route::get('Turno/{puesto}/{horario}/{area}/{fecha}','TurnoController@indexfecha');
+Route::get('Turno/{puesto}/{horario}/{fecha}','TurnoController@indexfecha');    //used instead cuz area esta en puesto id ahora...
+Route::get('Turno/{puesto}/{horario}/{area}/{fecha}','TurnoController@indexfecharea');
+
+Route::get('Turnof/{fecha}/{horario}','TurnoController@indexfechahorario'); 
+
+
+
 
 Route::get('Turno','TurnoController@index');//->middleware(tokenmiddle::class);//-> middleware('cors');
 Route::get('Turno/{id}','TurnoController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');//REceives 1 idempelado show many
