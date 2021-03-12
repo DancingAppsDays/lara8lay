@@ -101,6 +101,13 @@ class TurnoController extends Controller
 
 
 
+            "SELECT e.id, t.fecha, t.puesto, m.nombre as nombremaquina, m.ruido, a.i2000 as dbi2000 FROM turnodetalles as t INNER JOIN  empleados  as e ON e.id = t.idempleado  INNER JOIN equips  as m ON t.idmaquina  =  m.id INNER JOIN audioexes as a ON a.idempleado = e.id WHERE m.ruido >80 AND t.fecha >= $myfecha AND  i2000 >20 AND d2000>20 "         //(SELECT audioexes.idempleado IN audioexes WHERE i2000 >10 AND d2000>10)
+
+
+               
+
+
+
            // "SELECT id, nombre as NombreEmpleado FROM audioexes WHERE idempleado IN (SELECT id FROM empleados WHERE area = 2) AND i2000 >30 AND d2000>30"   //WORKS!
             
 
@@ -121,14 +128,14 @@ class TurnoController extends Controller
         // "SELECT  nombre,max(i2000) FROM audioexes GROUP BY id ORDER By i2000 Desc Limit 2"
 
             //wORKS, para obtener el mas alta de cada emp?
-        "SELECT id,idempleado,nombre,d2000 FROM audioexes WHERE (idempleado,d2000) IN (SELECT idempleado,MAX(d2000) FROM audioexes GROUP BY idempleado)"
+        //"SELECT id,idempleado,nombre,d2000 FROM audioexes WHERE (idempleado,d2000) IN (SELECT idempleado,MAX(d2000) FROM audioexes GROUP BY idempleado)"
         //obtiene solo el mayor
        // "SELECT id,idempleado,nombre,d2000 FROM audioexes WHERE d2000 IN (SELECT MAX(d2000) FROM audioexes)"
 
 
 
 
-
+                
         );
 
 

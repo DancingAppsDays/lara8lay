@@ -13,6 +13,7 @@ use App\Models\EmpleadoModel;
 //use App\Models\User;          //moved to middleware
 use Illuminate\Support\Facades\Auth;  
 
+use DB;
 
 //use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -131,6 +132,91 @@ class EmpleadoController extends Controller
 
         return   $article; //return new empleadoresource(article) missing
     }
+
+
+    public function showx($id) //for individual resource
+    {
+        //          //model
+        $results = DB::select(
+          
+          //El ultimo examen de empleado especifico...
+         // "SELECT id,idempleado,nombre,edad,imcsignos,apto, created_at FROM examenmes WHERE  (idempleado,updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM examenmes  GROUP BY idempleado) ORDER BY idempleado"
+        
+          
+              //WORKING FOR AUSDIOEX                                                                                                  //IMPORTANT: NOT a.idempleado, this another query!" ! ! !
+        //  "SELECT a.id,a.idempleado,a.i2000,a.d2000,a.created_at FROM audioexes as a WHERE (a.idempleado,a.created_at) IN (SELECT idempleado,MAX(created_at) FROM audioexes GROUP BY idempleado) ORDER BY a.idempleado"
+
+
+
+/*
+         "SELECT e.id,e.idempleado,e.nombre,e.edad,e.imcsignos,e.apto FROM examenmes as e 
+                  
+         INNER JOIN  audioexes 
+         
+         
+         as au ON e.idempleado = au.idempleado 
+         
+         WHERE  (e.idempleado,e.updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM examenmes  WHEREidempleado = $id GROUP BY idempleado)  "
+
+*/
+
+          // GOLD GOLD 
+
+"SELECT e.id,e.idempleado,e.nombre,e.edad,e.imcsignos,e.apto,au.i2000, au.d2000,au.id as AUID FROM examenmes as e 
+        
+INNER JOIN  (SELECT a.id,a.idempleado,a.i2000,a.d2000,a.created_at FROM audioexes as a WHERE (a.idempleado,a.created_at) IN (SELECT idempleado,MAX(created_at) FROM audioexes  GROUP BY idempleado))
+
+as au ON e.idempleado = au.idempleado 
+
+WHERE  (e.idempleado,e.updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM examenmes  WHERE idempleado = $id GROUP BY idempleado)  "
+
+
+
+
+
+
+
+
+
+
+
+     //WHERE(a.idempleado,a.created_at)  IN ( SELECT a.idempleado,MAX(updated_at) FROM audioexes WHERE a.idempleado = $id GROUP BY a.idempleado)
+         // INNER JOIN audioexes as a ON e.idempleado = a.idempleado 
+        
+        
+      
+
+         //"SELECT * FROM audioexes WHERE (idempleado,created_at) IN (SELECT idempleado,MAX(created_at)  GROUP BY idempleado)"
+        
+         // "SELECT  examenmes.idempleado,  examenmes.nombre,  examenmes.imcsignos FROM examenmes  INNER JOIN ( SELECT idempleado, i2000,d2000, MAX(created_at) FROM audioexes GROUP BY audioexes.idempleado) WHERE  ( examenmes.idempleado, examenmes.updated_at)  IN ( SELECT  examenmes.idempleado,MAX( examenmes.updated_at) FROM examenmes GROUP BY  examenmes.idempleado) HAVING    examenmes.idempleado = $id"
+        
+        
+        
+        );
+      
+
+      
+       return $results;// +  $results2;
+
+       
+    }
+
+    
+    public function showax($id) //for individual resource
+    {
+        //          //model
+        $results = DB::select(
+          
+          //El ultimo examen audio de empleado especifico...
+          "SELECT idempleado,nombre,fecha,i2000,d2000 FROM audioexes WHERE  (idempleado,updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM audioexes GROUP BY idempleado) HAVING  idempleado = $id LIMIT 1" //wasnt correct, more like where in subquery
+
+        );
+
+        return $results;
+      }
+        
+
+
 
     /**
      * Show the form for editing the specified resource.

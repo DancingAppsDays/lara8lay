@@ -80,8 +80,8 @@ Route::post('Puesto/{id}','PuestoController@update');
 
 
 Route::get('Puestocon/{puesto}/{horario}/{fecha}','PuestoController@consulta');     //nueva consulta multi
-
-
+Route::get('Empleadox/{id}','EmpleadoController@showx');
+Route::get('Empleadoax/{id}','EmpleadoController@showax');
 
 
 
@@ -121,7 +121,7 @@ Route::get('Turno/{puesto}/{horario}','TurnoController@indexpuesto');
 
 Route::get('Turnoa/{puesto}/{horario}/{area}','TurnoController@indexarea'); 
 
-Route::get('Turno/{puesto}/{horario}/{fecha}','TurnoController@indexfecha');    //used instead cuz area esta en puesto id ahora...
+Route::get('Turnop/{puesto}/{horario}/{fecha}','TurnoController@indexfecha');    //used instead cuz area esta en puesto id ahora...
 Route::get('Turno/{puesto}/{horario}/{area}/{fecha}','TurnoController@indexfecharea');
 
 Route::get('Turnof/{fecha}/{horario}','TurnoController@indexfechahorario'); 
@@ -140,8 +140,8 @@ Route::post('Turno/{id}','TurnoController@update');
 
 Route::get('Maquina','Maquinacontroller@index');//->middleware(tokenmiddle::class); //-> middleware('cors');
 
-Route::get('Maquina/{id}','Maquinacontroller@show')->middleware(tokenmiddle::class);//> middleware('cors'); 
-Route::post('Maquina','Maquinacontroller@store');//->middleware(tokenmiddle::class);//-> middleware('cors');    //DEBUGin
+Route::get('Maquina/{id}','Maquinacontroller@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
+Route::post('Maquina','Maquinacontroller@store')->middleware(tokenmiddle::class);//-> middleware('cors');    //DEBUGin
 Route::post('Maquina/{id}','Maquinacontroller@update')->middleware(tokenmiddle::class);//-> middleware('cors');    //DEBUGin
 
 //from the resource tut
@@ -150,7 +150,7 @@ Route::post('Maquina/{id}','Maquinacontroller@update')->middleware(tokenmiddle::
 Route::get('Empleado','EmpleadoController@index');//->middleware('tokenmiddle');//->middleware('cors');//->middleware(tokenmiddle::class);//->middleware('tokenmiddle'); //-> middleware('cors');
 
 //list single
-Route::get('Empleado/{id}','EmpleadoController@show')->middleware(tokenmiddle::class);//-> middleware('cors');
+Route::get('Empleado/{id}','EmpleadoController@show');//->middleware(tokenmiddle::class);//-> middleware('cors');
 
 //create new
 Route::post('Empleado','EmpleadoController@store')->middleware(tokenmiddle::class);//-> middleware('cors');
