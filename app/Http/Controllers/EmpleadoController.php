@@ -160,16 +160,33 @@ class EmpleadoController extends Controller
 
 */
 
-          // GOLD GOLD 
-
-"SELECT e.id,e.idempleado,e.nombre,e.edad,e.imcsignos,e.apto,au.i2000, au.d2000,au.id as AUID FROM examenmes as e 
+          // GOLD GOLD  //WHAT IS FAULTEDDD
+          
+          "SELECT e.id as exid,e.created_at,e.idempleado,e.nombre,e.edad,e.imcsignos,e.apto,au.i2000, au.d2000,au.id as AUID, emp.puesto, emp.nombre, emp.profilepic,emp.id FROM empleados as emp
         
-INNER JOIN  (SELECT a.id,a.idempleado,a.i2000,a.d2000,a.created_at FROM audioexes as a WHERE (a.idempleado,a.created_at) IN (SELECT idempleado,MAX(created_at) FROM audioexes  GROUP BY idempleado))
+          LEFT JOIN  (SELECT a.id,a.idempleado,a.i2000,a.d2000,a.created_at FROM audioexes as a WHERE (a.idempleado,a.created_at) IN (SELECT idempleado,MAX(created_at) FROM audioexes  WHERE idempleado = $id GROUP BY idempleado) LIMIT 1)
+          
+          as au ON emp.id = au.idempleado 
+          
+          LEFT JOIN  (SELECT e.id,e.idempleado,e.nombre,e.imcsignos,e.edad,e.apto,e.created_at FROM examenmes as e  WHERE  (e.idempleado,e.created_at)  IN ( SELECT idempleado,MAX(created_at) FROM examenmes  WHERE idempleado = $id GROUP BY idempleado)  LIMIT 1 )
+
+          as e  ON e.idempleado = emp.id WHERE  emp.id = $id"
+          
+          //WHERE  (e.idempleado,e.updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM examenmes  WHERE idempleado = $id GROUP BY idempleado)  "
+          
+
+//THIS WOKSS!!! pero si el primer left join esta vacío todo esta vacío....
+          /*
+"SELECT e.id as exid,e.idempleado,e.nombre,e.edad,e.imcsignos,e.apto,au.i2000, au.d2000,au.id as AUID, emp.puesto, emp.profilepic, emp.nombre FROM examenmes as e 
+        
+LEFT JOIN  (SELECT a.id,a.idempleado,a.i2000,a.d2000,a.created_at FROM audioexes as a WHERE (a.idempleado,a.created_at) IN (SELECT idempleado,MAX(created_at) FROM audioexes  GROUP BY idempleado))
 
 as au ON e.idempleado = au.idempleado 
 
-WHERE  (e.idempleado,e.updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM examenmes  WHERE idempleado = $id GROUP BY idempleado)  "
+LEFT JOIN empleados as emp ON e.idempleado = emp.id
 
+WHERE  (e.idempleado,e.updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM examenmes  WHERE idempleado = $id GROUP BY idempleado)  "
+*/
 
 
 
