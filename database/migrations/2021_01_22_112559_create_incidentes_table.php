@@ -25,6 +25,10 @@ class CreateIncidentesTable extends Migration
             //$table->timestamp('time')->useCurrent = true;
             $table->dateTime('fechacci'); 
             $table->dateTime('fechaservi'); 
+
+            $table->integer('turnodia')->nullable(); 
+            $table->integer('diasper')->nullable(); 
+
             $table->string('partec');
             $table->text('diagnos');
             $table->text('tratat')->nullable();
