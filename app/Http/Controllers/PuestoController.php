@@ -34,11 +34,35 @@ class PuestoController extends Controller
         ]);
     }
 
+
+    //public function consultalastfecha($puesto)
+
+
     public function consulta($puesto,$horario,$fecha) //NUMERO ESPECIFICO
     {
         //          //model
 
-        $results = DB::select("SELECT * FROM turnodetalles WHERE (idempleado,fecha)  IN ( SELECT idempleado,MAX(fecha) FROM turnodetalles GROUP BY idempleado) ORDER BY idempleado");
+        $results = DB::select(
+            
+            //arroja el maximo para cada id.......
+           // "SELECT * FROM turnodetalles WHERE (idempleado,fecha)  IN ( SELECT idempleado,MAX(fecha) FROM turnodetalles  WHERE puesto = $puesto GROUP BY idempleado) ORDER BY idempleado  "
+
+                
+                "SELECT *          from turnodetalles LEFT JOIN empleados ON turnodetalles.idempleado = empleados.id   LEFT JOIN audioexes ON turnodetalles.idempleado = audioexes.idempleado  
+                     where turnodetalles.fecha = 
+                (select max(fecha) from turnodetalles) 
+                  AND turnodetalles.puesto=$puesto AND horario=$horario"// LIMIT 1"
+
+
+                /* //FUNCIONA PARA OBTENER UNA ID DEL ultimo turno
+          "SELECT idempleado           from turnodetalles           where fecha = 
+               (select max(fecha) from turnodetalles) 
+                 AND puesto=$puesto AND horario=$horario LIMIT 1"*/
+        );
+
+
+
+
 
         //$emples = TurnodetalleModel::all(); //paginate(25);  //::all()
         return $results;
