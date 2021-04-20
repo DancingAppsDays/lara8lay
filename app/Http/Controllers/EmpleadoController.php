@@ -64,9 +64,11 @@ class EmpleadoController extends Controller
            // Log::debug($request->bearerToken());
            //return $header;//"something";
 
-        $emples = EmpleadoModel::all(); //paginate(25);  //::all()
-
+        $emples = EmpleadoModel::all();// ->exclude('profilepic'); //paginate(25);  //::all()
+             $emples -> makeHidden('profilepic'); //prevent Fat data with no purpose...
             
+
+             
         return response()->json([
             'status' => 'success',
             'mensaje' => 'Lista recuperada con èxito',

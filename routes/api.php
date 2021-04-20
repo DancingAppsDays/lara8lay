@@ -48,10 +48,11 @@ Route::post('Audios/{id}','AudioexController@update');
 
 
 
-Route::get('Examenmesx','ExamenmeController@indexa');
+Route::get('Examenmesx','ExamenmeController@indexa');   //for aggconsulta, estados de salud, cambiara para añadir daño audiometria
 
 
 Route::get('Examenmes/{id}','ExamenmeController@showall');
+Route::get('Examenmesagg/{id}','ExamenmeController@showallagg');
 
 Route::get('Examenme/{id}','ExamenmeController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
 Route::post('Examenme','ExamenmeController@store');//->middleware(tokenmiddle::class);

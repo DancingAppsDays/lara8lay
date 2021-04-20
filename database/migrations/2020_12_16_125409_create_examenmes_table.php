@@ -17,6 +17,7 @@ class CreateExamenmesTable extends Migration
             //$table->id();
 
             $table->increments('id');
+            $table->string('tipoexamen');           //podría ser un entero del catalogo
             $table->integer('idempleado')->unsigned();   
             $table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
             $table->string('nombre');

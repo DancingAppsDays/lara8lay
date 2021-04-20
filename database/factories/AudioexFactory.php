@@ -22,6 +22,9 @@ class AudioexFactory extends Factory
     public function definition()
     {
         return [
+
+            'tipoexamen' => 'audiometria',
+
             'idempleado' =>$this->faker->randomDigit,
             'nombre' => $this->faker->name,
             'fecha' =>$this->faker->dateTimeBetween('-30 years','now')->format('Y-m-d'),

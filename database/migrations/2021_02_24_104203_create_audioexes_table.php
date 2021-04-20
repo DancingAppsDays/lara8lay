@@ -14,8 +14,9 @@ class CreateAudioexesTable extends Migration
     public function up()
     {
         Schema::create('audioexes', function (Blueprint $table) {
+            
             $table->id();
-
+            $table->string('tipoexamen'); 
             $table->integer('idempleado')->unsigned();   
             $table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
             
