@@ -40,11 +40,22 @@ Route::get('/clear-cache2', function() {
 
 
 
+Route::get('Experiod1/{id}','ExamenperiodoController@show');
+Route::get('Experiod/{id}','ExamenperiodoController@showall');
+
+Route::post('Experiod','ExamenperiodoController@store');//->middleware(tokenmiddle::class);
+Route::post('Experiod/{id}','ExamenperiodoController@update');
+
+
 Route::get('Audios1/{id}','AudioexController@show');
+Route::get('Audioperiod/{id}','AudioexController@showperiod');    //nueva plataforma period
 Route::get('Audios/{id}','AudioexController@showall');
 
 Route::post('Audios','AudioexController@store');//->middleware(tokenmiddle::class);
 Route::post('Audios/{id}','AudioexController@update');
+
+
+
 
 
 
@@ -55,6 +66,8 @@ Route::get('Examenmes/{id}','ExamenmeController@showall');
 Route::get('Examenmesagg/{id}','ExamenmeController@showallagg');
 
 Route::get('Examenme/{id}','ExamenmeController@show');//->middleware(tokenmiddle::class);//> middleware('cors'); 
+Route::get('Examenmeperiod/{id}','ExamenmeController@showperiod');
+
 Route::post('Examenme','ExamenmeController@store');//->middleware(tokenmiddle::class);
 Route::post('Examenme/{id}','ExamenmeController@update');
 
@@ -93,6 +106,10 @@ Route::post('Area','AreaController@store');
 Route::post('Area/{id}','AreaController@update');
 
 Route::group(['middleware' =>['pref']], function(){
+
+
+
+
 
 Route::post('Login', 'AuthController@login');//-> middleware('pref');
 Route::post('Logout', 'AuthController@logout');//-> middleware('cors');

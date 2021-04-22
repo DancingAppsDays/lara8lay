@@ -17,7 +17,11 @@ class CreateExamenmesTable extends Migration
             //$table->id();
 
             $table->increments('id');
-            $table->string('tipoexamen');           //podría ser un entero del catalogo
+            $table->string('tipoexamen');           //podría ser un entero del catalogo, mismo nombre en varios tipos para su consumo en list all, probablemente deprecado en historial anual mode
+
+            $table->integer('idperiodo')->unsigned()->nullable();   
+            $table->foreign('idperiodo')->references('id')-> on('examenperiodo')->onDelete('set null'); //UNTESTED
+
             $table->integer('idempleado')->unsigned();   
             $table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
             $table->string('nombre');

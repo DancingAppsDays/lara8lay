@@ -19,6 +19,9 @@ class CreateAudioexesTable extends Migration
             $table->string('tipoexamen'); 
             $table->integer('idempleado')->unsigned();   
             $table->foreign('idempleado')->references('id')-> on('Empleado')->onDelete('set null');
+
+            $table->integer('idperiodo')->unsigned()->nullable();   //nullable for testing and tesis expo
+            $table->foreign('idperiodo')->references('id')-> on('examenperiodo')->onDelete('set null');
             
             $table->string('nombre')->nullable();
             $table->string('fecha')->nullable();        //created_at?

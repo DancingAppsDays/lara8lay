@@ -36,6 +36,21 @@ class AudioexController extends Controller
         //return   $article;
     }
 
+    public function showperiod($id) //for  periodo anual 
+    {
+        //          //model
+        $article = ex::where('idperiodo','=',$id)->first();
+
+
+
+        return response()->json([
+            'status' => 'success',
+            'mensaje' => 'Audiometría recuperada con éxito',
+            'data' => $article
+        ]);
+        //return   $article;
+    }
+
 
 
     public function showall($id) //for individual resource
