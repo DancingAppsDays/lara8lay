@@ -5,9 +5,45 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\examenperiodo as ex;
 
+use DB;
 
 class ExamenperiodoController extends Controller
 {
+
+
+     public function indexa()
+   {
+     /*  
+   $results = DB::select("
+   SELECT * FROM examenperiodos WHERE (idempleado,updated_at)  IN ( SELECT idempleado,MAX(updated_at) FROM examenperiodos GROUP BY idempleado) ORDER BY idempleado"
+
+);*/
+
+//incluye para cada empleado... su último experiod
+
+//LEFT JOIN esta vez arrojaba datos null, y limit2 solo arrojaba muy pocos...
+
+$results =  DB::select("SELECT * FROM empleados 
+  INNER JOIN  (SELECT * FROM examenperiodos as ex  WHERE  (ex.idempleado,ex.created_at)  IN 
+  ( SELECT idempleado,MAX(created_at) FROM examenperiodos  GROUP BY idempleado))
+as exp  ON exp.idempleado = empleados.id"
+);
+
+  
+      
+      
+       return $results;
+
+     
+   }
+
+
+
+
+
+
+
+
     public function store(Request $request)
    {
        //

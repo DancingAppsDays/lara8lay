@@ -42,7 +42,7 @@ Route::get('/clear-cache2', function() {
 
 Route::get('Experiod1/{id}','ExamenperiodoController@show');
 Route::get('Experiod/{id}','ExamenperiodoController@showall');
-
+Route::get('Experiod','ExamenperiodoController@indexa');  //último de todos los emps
 Route::post('Experiod','ExamenperiodoController@store');//->middleware(tokenmiddle::class);
 Route::post('Experiod/{id}','ExamenperiodoController@update');
 
