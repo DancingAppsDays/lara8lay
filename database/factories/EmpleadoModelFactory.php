@@ -29,6 +29,8 @@ class EmpleadoModelFactory extends Factory
             'puesto' => $this->faker->text(20),
             'area' =>$this->faker->optional(0.7, 1)->numberBetween(1,4), 
             'planta' => $this->faker->numberBetween(1,5), 
+            'email' => preg_replace('/@example\..*/', '@domain.com',  $this->faker->unique()->safeEmail)
+            //$this->faker->unique()->safeEmail()
             //'positionx' =>$this->faker->numberBetween(1,100),   //numerify($string = '###'),      //NUMBER from UNITY SPACE::::
            // 'positiony' =>$this->faker->numberBetween(1,100),
             //

@@ -25,6 +25,8 @@ class Createempleado extends Migration
             //$table->decimal('positiony',7,2)->nullable(); 
            
 
+            $table->string('email')->nullable();        //para notificaciones de salud....
+
             $table->longText('profilepic')->nullable(); 
             $table->timestamps();
         });

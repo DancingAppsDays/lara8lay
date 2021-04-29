@@ -38,7 +38,7 @@ Route::get('/clear-cache2', function() {
 });
 
 
-
+Route::get('Empleadonot/{id}','EmpleadoController@mail');
 
 Route::get('Experiod1/{id}','ExamenperiodoController@show');
 Route::get('Experiod/{id}','ExamenperiodoController@showall');

@@ -21,6 +21,50 @@ class EmpleadoController extends Controller
 {
     //
 
+    public function mail($id) //Request $request
+    {
+       
+
+
+        $mailto = EmpleadoModel::select('email')->findOrFail($id);//where('id','=',$id)->findOrFail($id);//->pluck('email');
+
+        //return   $article; 
+
+
+        Mail::raw("Text to MAILLL",function($message){  //usa views..
+
+
+          
+
+
+          $message ->from('dancingappsdays@gmail.com'," Autonotificaciones SELMEDICA");
+         
+
+          $message ->to($mailto)->subject('NRecordatorio fecha examen medico');
+         
+         
+         
+         });
+    }
+
+
+
+
+    
+    /*
+    public function mail(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        Mail::send('emails.reminder', ['user' => $user], function ($m) use ($user) {
+            $m->from('hello@app.com', 'Your Application');
+
+            $m->to($user->email, $user->name)->subject('Your Reminder!');
+        });
+    }
+}*/
+
+
     public function index(Request $request)
     {
         //      //but didnt auth....
