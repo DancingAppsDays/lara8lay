@@ -13,7 +13,14 @@ use App\Models\EmpleadoModel;
 //use App\Models\User;          //moved to middleware
 use Illuminate\Support\Facades\Auth;  
 
+
+use Illuminate\Support\Facades\Mail;
+
 use DB;
+
+use App\Models\examenperiodo as ex;
+
+
 
 //use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -24,27 +31,93 @@ class EmpleadoController extends Controller
     public function mail($id) //Request $request
     {
        
+      $Emp= EmpleadoModel::findOrFail($id);
+
+        $Nombre = $Emp['nombre'];
+       // $mailto = EmpleadoModel::select('email')->findOrFail($id);//where('id','=',$id)->findOrFail($id);//->pluck('email');
+        $mailto =$Emp['email'];
+        
+      
+        
+        
+        $Mensaje= "Estimado ".$Nombre."<br>". "Le recordamos que su proximo examen médico es el día: 0505-2020";
 
 
-        $mailto = EmpleadoModel::select('email')->findOrFail($id);//where('id','=',$id)->findOrFail($id);//->pluck('email');
+        //return $Mensaje;
+        /*
+        foreach (['taylor@example.com', 'dries@example.com'] as $recipient) {
+          Mail::to($recipient)->send(new OrderShipped($order));
+      }*/
 
-        //return   $article; 
-
-
-        Mail::raw("Text to MAILLL",function($message){  //usa views..
-
-
-          
-
-
+/*
+        Mail::raw($Mensaje,function($message) use($mailto){
           $message ->from('dancingappsdays@gmail.com'," Autonotificaciones SELMEDICA");
-         
-
           $message ->to($mailto)->subject('NRecordatorio fecha examen medico');
-         
-         
-         
          });
+
+         return response()->json([
+          'status' => 'success',
+          'mensaje' => 'Email enviado con éxito',
+          //'data' => $emples
+      ]);*/
+
+    }
+
+    public function mailproximoexamen()
+    {
+
+
+      $results =  DB::select("SELECT * FROM empleados 
+      INNER JOIN  (SELECT * FROM examenperiodos as ex  WHERE  (ex.idempleado,ex.created_at)  IN 
+      ( SELECT idempleado,MAX(created_at) FROM examenperiodos    GROUP BY idempleado) )
+    as exp  ON exp.idempleado = empleados.id  WHERE realizado <>1 ORDER BY empleados.id
+    "
+    );
+   // return $results;//['nombre']; 
+
+   // $recipients= json_encode($results);
+
+    //$numa = $recipients.length;
+    //return $recipients[5];
+    //return $numa;
+   // return$recipients;
+
+
+/*
+   $keys = Object.keys($results);
+
+   for ($i = 0; $i < $keys.length; $i++) {
+     $key = $keys[$i];
+    //console.log(key, yourObject[key]);
+
+    echo $key."  ".$results[$key];
+  }
+*/
+  //$arra[] = $results;
+ // return $results
+
+  //echo count($results);
+  for($i=0;$i<count($results);$i++)
+  {
+    // $reg = json_encode($results[$i]);  //funciona pero luego que?
+   // $data = json_decode($results[$i],true);   //no funciona
+
+     
+    $mailto =  $results[$i]->email;              // WINNER
+    $Mensaje= "Estimado ". $results[$i]->nombre."<br>". "Le recordamos que su proximo examen médico es el día:". $results[$i]->fecha;// 0505-2020";
+
+    Mail::raw($Mensaje,function($message) use($mailto){
+      $message ->from('dancingappsdays@gmail.com'," Autonotificaciones SELMEDICA");
+      $message ->to($mailto)->subject('NRecordatorio fecha examen medico');
+     });
+  }
+  return response()->json([
+    'status' => 'success',
+    'mensaje' => 'Email enviado con éxito',
+    //'data' => $emples
+]);
+      
+
     }
 
 
