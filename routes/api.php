@@ -51,12 +51,21 @@ Route::post('Experiod/{id}','ExamenperiodoController@update');
 Route::get('Audios1/{id}','AudioexController@show');
 Route::get('Audioperiod/{id}','AudioexController@showperiod');    //nueva plataforma period
 Route::get('Audios/{id}','AudioexController@showall');
-
 Route::post('Audios','AudioexController@store');//->middleware(tokenmiddle::class);
 Route::post('Audios/{id}','AudioexController@update');
 
 
+Route::get('Orina1/{id}','ExamenorinaController@show');
+Route::get('Orinaperiod/{id}','ExamenorinaController@showperiod');    //nueva plataforma period
+Route::get('Orinas/{id}','ExamenorinaController@showall');
+Route::post('Orinas','ExamenorinaController@store');//->middleware(tokenmiddle::class);
+Route::post('Orinas/{id}','ExamenorinaController@update');
 
+Route::get('Sangre1/{id}','ExamensangreController@show');
+Route::get('Sangreperiod/{id}','ExamensangreController@showperiod');    //nueva plataforma period
+Route::get('Sangres/{id}','ExamensangreController@showall');
+Route::post('Sangres','ExamensangreController@store');//->middleware(tokenmiddle::class);
+Route::post('Sangres/{id}','ExamensangreController@update');
 
 
 
