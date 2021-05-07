@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\TurnodetalleModel;
 use App\Models\Reportemedico;
 use App\Models\puesto;
+use App\Models\Planta;
 use App\Models\usodetalels;
 
 use App\Models\Audioex;
@@ -34,7 +35,7 @@ class DatabaseSeeder extends Seeder
       Reportemedico::factory(80)->create();
 
      puesto::factory(12)->create();
-
+      Planta::factory(5)->create();
 
     
      Audioex::factory(100)->create();

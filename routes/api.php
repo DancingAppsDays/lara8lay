@@ -58,14 +58,28 @@ Route::post('Audios/{id}','AudioexController@update');
 Route::get('Orina1/{id}','ExamenorinaController@show');
 Route::get('Orinaperiod/{id}','ExamenorinaController@showperiod');    //nueva plataforma period
 Route::get('Orinas/{id}','ExamenorinaController@showall');
-Route::post('Orinas','ExamenorinaController@store');//->middleware(tokenmiddle::class);
-Route::post('Orinas/{id}','ExamenorinaController@update');
+Route::post('Orina','ExamenorinaController@store');//->middleware(tokenmiddle::class);
+Route::post('Orina/{id}','ExamenorinaController@update');
 
 Route::get('Sangre1/{id}','ExamensangreController@show');
 Route::get('Sangreperiod/{id}','ExamensangreController@showperiod');    //nueva plataforma period
 Route::get('Sangres/{id}','ExamensangreController@showall');
-Route::post('Sangres','ExamensangreController@store');//->middleware(tokenmiddle::class);
-Route::post('Sangres/{id}','ExamensangreController@update');
+Route::post('Sangre','ExamensangreController@store');//->middleware(tokenmiddle::class);
+Route::post('Sangre/{id}','ExamensangreController@update');
+
+
+Route::get('Espiro1/{id}','ExamenespiroController@show');
+Route::get('Espiroperiod/{id}','ExamenespiroController@showperiod');  
+Route::get('Espiros/{id}','ExamenespiroController@showall');
+Route::post('Espiro','ExamenespiroController@store');
+Route::post('Espiro/{id}','ExamenespiroController@update');
+
+
+Route::get('Rayosx1/{id}','ExamenrayosxController@show');
+Route::get('Rayosxperiod/{id}','ExamenrayosxController@showperiod');  
+Route::get('Rayosxs/{id}','ExamenrayosxController@showall');
+Route::post('Rayosx','ExamenrayosxController@store');
+Route::post('Rayosx/{id}','ExamenrayosxController@update');
 
 
 
@@ -114,6 +128,12 @@ Route::get('Area','AreaController@index');//->middleware(tokenmiddle::class);
 Route::get('Area/{id}','AreaController@show');//->middleware(tokenmiddle::class);
 Route::post('Area','AreaController@store');
 Route::post('Area/{id}','AreaController@update');
+
+
+Route::get('Planta','PlantaController@index');//->middleware(tokenmiddle::class);
+Route::get('Planta/{id}','PlantaController@show');//->middleware(tokenmiddle::class);
+Route::post('Planta','PlantaController@store');
+Route::post('Planta/{id}','PlantaController@update');
 
 Route::group(['middleware' =>['pref']], function(){
 

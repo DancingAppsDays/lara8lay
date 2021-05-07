@@ -51,7 +51,7 @@ as exp  ON exp.idempleado = empleados.id"
        
        return response()->json([
          'status' => 'success',
-         'mensaje' => 'Expediente añadido con èxito',
+         'mensaje' => 'Examen periodico añadido con èxito',
          'data' => $exa
      ]);
      
